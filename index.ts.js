@@ -27,7 +27,7 @@ app.get(".*", async ctx => {
       fetch(`https://${proj}.glitch.me`).then(_res => {
         ctx.res.setMimeType(_res.body.contentType);
         ctx.res.setStatus(_res.status);
-        resolve(":]")
+        resolve(":]");
       });
     }
   });
