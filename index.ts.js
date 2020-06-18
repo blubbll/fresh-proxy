@@ -19,19 +19,18 @@ const app = new Application(),
     ? "https://fresh-proxy.glitch.me"
     : "http://fresh-proxy.eu-4.evennode.com";
 
-app.get(".*", ctx => {
-    return new Promise(resolve => resolve({"json": "success"}));
-
-  const proj = ctx.req.path.slice(1);
-  if (!proj.includes(".")) {
-    console.log(`Forwarding ping to project [${proj}]...`);
-    fetch(`https://${proj}.glitch.me`).then(_res => {
-      console.log(_res);
-      ctx.res.setMimeType(_res.body.contentType);
-      ctx.res.setStatus(_res.status);
-      return "ok";
-    });
-  }
+app.get(".*", async ctx => {
+  return new Promise(resolve => {
+    const proj = ctx.req.path.slice(1);
+    if (!proj.includes(".")) {
+      console.log(`Forwarding ping to project [${proj}]...`);
+      fetch(`https://${proj}.glitch.me`).then(_res => {
+        ctx.res.setMimeType(_res.body.contentType);
+        ctx.res.setStatus(_res.status);
+        resolve(":]")
+      });
+    }
+  });
 });
 
 (async () => {
