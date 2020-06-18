@@ -19,7 +19,8 @@ const app = new Application(),
     ? "https://fresh-proxy.glitch.me"
     : "http://fresh-proxy.eu-4.evennode.com";
 
-app.get(".*", async ctx => {
+app.get(".*", ctx => {
+  if(ctx.req.path !== "/")
   return new Promise(resolve => {
     const proj = ctx.req.path.slice(1);
     if (!proj.includes(".")) {
@@ -30,7 +31,7 @@ app.get(".*", async ctx => {
         resolve(":]");
       });
     }
-  });
+  }); else return "missing glitch-project parameter lol"
 });
 
 (async () => {
