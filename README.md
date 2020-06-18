@@ -1,1 +1,1 @@
-let's have some fun with basic auth yo
+let's have some fun with freshping yo
